@@ -1,1 +1,10 @@
+# Library output
 dist/
+
+# Wonderland Engine cache & build
+cache/
+.editor/
+deploy/
+
+# Js
+node_modules/
