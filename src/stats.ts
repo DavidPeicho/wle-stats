@@ -1,3 +1,5 @@
+import {CHART_BACKGROUND, MAIN_COLOR} from './colors.js';
+
 export interface StatsOptions {
     width: number;
 }
@@ -5,14 +7,16 @@ export interface StatsOptions {
 export type ColorStyle = string | CanvasGradient | CanvasPattern;
 
 export class Stats {
-    public background: ColorStyle = '#000000';
-    public main: ColorStyle = '#e8008a';
+    public background: ColorStyle = CHART_BACKGROUND;
+    public main: ColorStyle = MAIN_COLOR;
 
     private _columnWidth: number = 1;
 
     private _canvas: HTMLCanvasElement;
     private _context: CanvasRenderingContext2D;
 
+    private _max: number = 100.0;
+    private _min: number = 0.0;
     private _dirty: boolean = true;
 
     constructor() {
@@ -51,7 +55,8 @@ export class Stats {
 
         /* Append the new value. 2D canvas origin is top-left. */
         this._context.fillStyle = this.main;
-        const y = Math.random() * 50;
+        const yScale = (value - this._min) / (this._max - this._min);
+        const y = yScale * height;
         this._context.fillRect(width, y, this._columnWidth, height - y);
     }
 
