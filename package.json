@@ -1,0 +1,27 @@
+{
+  "name": "wle-stats",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": "git@github.com:DavidPeicho/wle-stats.git",
+  "author": "David Peicho <david.peicho@gmail.com>",
+  "license": "MIT",
+  "wonderlandengine": {},
+  "devDependencies": {
+    "@wonderlandengine/api": "^1.0.1",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "@wonderlandengine/api": "^1.0.1"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "pretty": "prettier --config ./prettierrc.json --write \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "prettier": "^3.0.0"
+  }
+}
