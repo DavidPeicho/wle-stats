@@ -2,10 +2,21 @@ import {CHART_BACKGROUND, MAIN_COLOR} from './colors.js';
 
 export interface StatsOptions {
     width: number;
+    minY: number;
+    maxY: number;
 }
 
 export type ColorStyle = string | CanvasGradient | CanvasPattern;
 
+/**
+ * Stats graph.
+ *
+ * ## Usage
+ *
+ * ```js
+ * const stats = new Stats();
+ * ```
+ */
 export class Stats {
     public background: ColorStyle = CHART_BACKGROUND;
     public main: ColorStyle = MAIN_COLOR;
@@ -15,11 +26,12 @@ export class Stats {
     private _canvas: HTMLCanvasElement;
     private _context: CanvasRenderingContext2D;
 
-    private _max: number = 100.0;
-    private _min: number = 0.0;
-    private _dirty: boolean = true;
+    private _max: number;
+    private _min: number;
 
-    constructor() {
+    private _dirty = true;
+
+    constructor(opts: Partial<StatsOptions> = {}) {
         this._canvas = document.createElement('canvas');
         const context = this._canvas.getContext('2d');
         if (!context) {
@@ -28,11 +40,17 @@ export class Stats {
 
         this._context = context;
 
+        const {minY = 0, maxY = 120} = opts;
+        this._min = minY;
+        this._max = maxY;
+
         this.setDimensions(100, 40);
         this.clear();
     }
 
     update(value: number) {
+        if (this._dirty) this.clear();
+
         const width = this._canvas.width - this._columnWidth;
         const height = this._canvas.height;
 
@@ -57,12 +75,17 @@ export class Stats {
         this._context.fillStyle = this.main;
         const yScale = (value - this._min) / (this._max - this._min);
         const y = yScale * height;
-        this._context.fillRect(width, y, this._columnWidth, height - y);
+        this._context.fillRect(width, height - y, this._columnWidth, y);
     }
 
     clear() {
         this._context.fillStyle = this.background;
         this._context.fillRect(0, 0, this._canvas.width, this._canvas.height);
+        this._dirty = false;
+    }
+
+    setMeasurements(): this {
+        return this;
     }
 
     setDimensions(width: number, height: number): this {
@@ -71,6 +94,7 @@ export class Stats {
         return this;
     }
 
+    /** Graph canvas. */
     get canvas(): HTMLCanvasElement {
         return this._canvas;
     }
