@@ -21,9 +21,11 @@ function createHeader(): HTMLElement {
 }
 
 /**
+ * Create the dom container enclosing the header
+ * as well as the chart canvas.
  *
- * @param canvas
- * @returns
+ * @param canvas The canva to append.
+ * @returns the html element.
  */
 function template(canvas: HTMLCanvasElement) {
     const text = createHeader();
@@ -44,7 +46,9 @@ function template(canvas: HTMLCanvasElement) {
  * To use with the {@link StatsComponent} component.
  */
 export enum StatsType {
+    /** Renders FPS. */
     Fps = 0,
+    /** Renders frame time, **in milliseconds**. */
     Milliseconds = 1,
 }
 
@@ -67,12 +71,15 @@ export class StatsComponent extends Component {
     @property.enum(['fps', 'milliseconds'], 0)
     statsType: number = 0;
 
-    /** HTML id of the parent container. When empty, defaults to `document.body`. */
+    /**
+     * HTML id of the parent container. When empty,
+     * defaults to `document.body`.
+     */
     @property.string()
     parentContainer: string = '';
 
     /**
-     * Rate, **in milliseconds**, at which the statistics are updated.
+     * Rate, **in milliseconds**, at which the chart is updated.
      *
      * @note The value will be averaged over this time.
      */
@@ -101,6 +108,7 @@ export class StatsComponent extends Component {
     /** Triggered after the scene is rendered. @hidden */
     private readonly _onPostRender = this._update.bind(this);
 
+    /** @hidden */
     constructor() {
         // @ts-ignore
         super(...arguments);
@@ -165,9 +173,7 @@ export class StatsComponent extends Component {
     private _update(): void {
         ++this._frame;
 
-        const now = performance.now();
-        const elapsedMs = now - this._startTime;
-
+        const elapsedMs = performance.now() - this._startTime;
         if (elapsedMs < this.updateRateMs) return;
 
         let value = 0.0;

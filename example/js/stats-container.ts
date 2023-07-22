@@ -1,12 +1,14 @@
 import {Component, WonderlandEngine} from '@wonderlandengine/api';
-import {property} from '@wonderlandengine/api/decorators.js';
 
 /**
- * stats-container
+ * Dummy component to create a shared dom container
+ * between all StatsComponent in this project.
  */
 export class StatsContainer extends Component {
+    /** @overload */
     static TypeName = 'stats-container';
 
+    /** @overload */
     init() {
         const container = document.createElement('div');
         container.style.position = 'fixed';

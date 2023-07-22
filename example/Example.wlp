@@ -131,7 +131,7 @@
                 {
                     "type": "light",
                     "light": {
-                        "intensity": 3.3329999
+                        "intensity": 1.5
                     }
                 }
             ],
@@ -158,7 +158,7 @@
                 {
                     "type": "light",
                     "light": {
-                        "intensity": 3.3329999
+                        "intensity": 1.5
                     }
                 }
             ],
