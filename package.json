@@ -24,7 +24,8 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "pretty": "prettier --config ./prettierrc.json --write \"src/**/*.ts\""
+    "pretty": "prettier --config ./prettierrc.json --write \"src/**/*.ts\"",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "prettier": "^3.0.0"
