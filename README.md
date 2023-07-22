@@ -2,7 +2,7 @@
 
 WonderlandEngine stats component.
 
-![Example showing FPS and frame time](./img/example.png)
+![Example showing FPS and frame time](https://github.com/DavidPeicho/wle-stats/blob/main/img/example.png)
 
 This library is inspired by [stats.js](https://github.com/mrdoob/stats.js) from mrdoob.
 
