@@ -74,6 +74,9 @@ export class StatsComponent extends Component {
     /**
      * HTML id of the parent container. When empty,
      * defaults to `document.body`.
+     *
+     * If no parent is provided, the element will by default
+     * use `position: fixed` to be visible on top of everything.
      */
     @property.string()
     parentContainer: string = '';
@@ -122,9 +125,16 @@ export class StatsComponent extends Component {
     onActivate(): void {
         const parent = this.parentContainer
             ? document.getElementById(this.parentContainer)
-            : document.body;
-
-        parent?.append(this._container);
+            : null;
+        if (!parent) {
+            /* If no parent is provided, fallback to the upper
+             * left corner, above everything. */
+            this._container.style.position = 'fixed';
+            this._container.style.top = '0';
+            this._container.style.left = '0';
+            this._container.style.zIndex = '1000';
+        }
+        (parent ?? document.body).append(this._container);
 
         this.reset();
         this._engine.scene.onPostRender.add(this._onPostRender);
