@@ -1,24 +1,51 @@
 import {Component} from '@wonderlandengine/api';
 import {property} from '@wonderlandengine/api/decorators.js';
-import {Stats} from './stats.js';
+
 import {BACKGROUND, MAIN_COLOR} from './colors.js';
+import {StatsGraph} from './stats.js';
 
 /**
  * Create the header enclosing the title and the numeric value.
  *
- * @returns An object containing the header container as well
- *     as the html element containing the text to update.
+ * @returns The html element.
  */
-function createHeader(): {container: HTMLDivElement; text: HTMLElement} {
+function createHeader(): HTMLElement {
     const text = document.createElement('p');
     text.style.margin = '0';
     text.style.padding = '6px';
     text.style.fontFamily = 'monospace';
     text.style.fontWeight = 'bold';
+    text.style.color = MAIN_COLOR;
+
+    return text;
+}
+
+/**
+ *
+ * @param canvas
+ * @returns
+ */
+function template(canvas: HTMLCanvasElement) {
+    const text = createHeader();
 
     const container = document.createElement('div');
-    container.append(text);
+    container.style.background = BACKGROUND;
+    container.style.margin = '4px';
+
+    container.appendChild(text);
+    container.appendChild(canvas);
+
     return {container, text};
+}
+
+/**
+ * Stats type.
+ *
+ * To use with the {@link StatsComponent} component.
+ */
+export enum StatsType {
+    Fps = 0,
+    Milliseconds = 1,
 }
 
 /**
@@ -34,19 +61,15 @@ function createHeader(): {container: HTMLDivElement; text: HTMLElement} {
  */
 export class StatsComponent extends Component {
     /** @override */
-    static TypeName = 'wle:stats';
+    static TypeName = 'stats';
+
+    /** Stats type. */
+    @property.enum(['fps', 'milliseconds'], 0)
+    statsType: number = 0;
 
     /** HTML id of the parent container. When empty, defaults to `document.body`. */
     @property.string()
     parentContainer: string = '';
-
-    /**
-     * If `true`, append a header with a title and the numerical value.
-     *
-     * Example: "FPS: 60".
-     */
-    @property.bool(true)
-    useDefaultHeader: boolean = true;
 
     /**
      * Rate, **in milliseconds**, at which the statistics are updated.
@@ -56,16 +79,8 @@ export class StatsComponent extends Component {
     @property.float(500)
     updateRateMs: number = 500;
 
-    /* Graph properties. */
-
-    @property.float(0)
-    minY: number = 0;
-
-    @property.float(120)
-    maxY: number = 120;
-
     /** Stats object. @hidden */
-    private _stats: Stats = null!;
+    private _stats: StatsGraph = new StatsGraph();
 
     /** Timestamp starting at the last update. @hidden */
     private _startTime: number = 0.0;
@@ -78,9 +93,6 @@ export class StatsComponent extends Component {
     /** <div> enclosing the stats canvas. @hidden */
     private _container: HTMLDivElement = null!;
 
-    /** <div> enclosing the header. @hidden */
-    private _header: HTMLDivElement = null!;
-
     /** <p> containing the text inside the header. @hidden */
     private _text: HTMLElement = null!;
 
@@ -89,48 +101,65 @@ export class StatsComponent extends Component {
     /** Triggered after the scene is rendered. @hidden */
     private readonly _onPostRender = this._update.bind(this);
 
-    /** @override */
-    init(): void {
-        const {container: header, text} = createHeader();
-        this._header = header;
+    constructor() {
+        // @ts-ignore
+        super(...arguments);
 
+        const {container, text} = template(this._stats.canvas);
+        this._container = container;
         this._text = text;
-        this._text.style.color = MAIN_COLOR;
-
-        this._container = document.createElement('div');
-        this._container.style.background = BACKGROUND;
-        this._container.style.position = 'fixed';
-        this._container.style.top = '0';
-        this._container.style.left = '0';
     }
 
     /** @override */
     onActivate(): void {
-        if (this.useDefaultHeader) {
-            this._container.prepend(this._header);
-        }
         const parent = this.parentContainer
             ? document.getElementById(this.parentContainer)
             : document.body;
+
         parent?.append(this._container);
 
-        this._stats = new Stats({minY: this.minY, maxY: this.maxY});
-        this._container.appendChild(this._stats.canvas);
-
+        this.reset();
         this._engine.scene.onPostRender.add(this._onPostRender);
     }
 
     /** @override */
     onDeactivate(): void {
-        this._header.remove();
         this._container.remove();
-
         this._engine.scene.onPostRender.remove(this._onPostRender);
     }
 
+    reset(): this {
+        this._startTime = performance.now();
+        this._frame = 0;
+        return this;
+    }
+
+    @property.float(0)
+    set minY(value: number) {
+        // @todo: Fix workaround due to how Wonderland Engine setup defaults.
+        if (this._stats) this._stats.min = value;
+    }
+
+    @property.float(120)
+    set maxY(value: number) {
+        // @todo: Fix workaround due to how Wonderland Engine setup defaults.
+        if (this._stats) this._stats.max = value;
+    }
+
+    /** Column color. Defaults to Wonderland Engine purple. */
+    @property.string(MAIN_COLOR)
+    set color(value: string) {
+        // @todo: Fix workaround due to how Wonderland Engine setup defaults.
+        if (!this._text || !this._stats) return;
+
+        this._text.style.color = value;
+        this._stats.main = value;
+        this._stats.needsClear();
+    }
+
     /** HTML element enclosing the stats canvas. */
-    get container(): HTMLDivElement {
-        return this._container;
+    get dom(): StatsGraph {
+        return this._stats;
     }
 
     private _update(): void {
@@ -141,12 +170,24 @@ export class StatsComponent extends Component {
 
         if (elapsedMs < this.updateRateMs) return;
 
-        const fps = this._frame / (elapsedMs * 0.001);
-        if (this.useDefaultHeader) {
-            this._text.innerText = `FPS: ${fps.toFixed(1)}`;
+        let value = 0.0;
+        let text: string = null!;
+        switch (this.statsType) {
+            case StatsType.Fps:
+                value = this._frame / (elapsedMs * 0.001);
+                text = `FPS: ${value.toFixed(1)}`;
+                break;
+            case StatsType.Milliseconds:
+                value = elapsedMs / this._frame;
+                text = `${value.toFixed(1)} milliseconds`;
+                break;
+            default:
+                throw new Error(
+                    `StatsComponent.update(): Unknown statsType ${this.statsType}`
+                );
         }
-        this._stats.update(fps);
-        this._startTime = now;
-        this._frame = 0;
+        this._text.innerHTML = text;
+        this._stats.update(value);
+        this.reset();
     }
 }

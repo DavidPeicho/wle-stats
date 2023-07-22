@@ -1,2 +1,2 @@
-export {StatsComponent} from './component.js';
-export {Stats} from './stats.js';
+export * from './component.js';
+export * from './stats.js';
