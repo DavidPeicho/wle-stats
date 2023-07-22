@@ -8,18 +8,20 @@ This library is inspired by [stats.js](https://github.com/mrdoob/stats.js) from 
 
 ## Features
 
-@todo
+* A custom component to add in your [Wonderland Engine](https://wonderlandengine.com/) scenes
+    * FPS monitoring, based on the engine pre & post render hooks
+    * Frame time monitoring, based on the engine pre & post render hooks
+* [StatsGraph](./src/stats.ts) class usable on any webpage without Wonderland Engine
 
 ## Usage
 
 You can install the library using `yarn` / `npm`:
 
-
 ```sh
 yarn i wle-stats
 ```
 
-### Wonderland Component
+### Wonderland Engine Component
 
 No further setup is required, you can search the component and add it to any object.
 
