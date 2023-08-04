@@ -6,7 +6,7 @@ WonderlandEngine stats component.
 
 This library is inspired by [stats.js](https://github.com/mrdoob/stats.js) from mrdoob.
 
-## Features
+**Features Overview**:
 
 * A custom component to add in your [Wonderland Engine](https://wonderlandengine.com/) scenes
     * FPS monitoring, based on the engine pre & post render hooks
@@ -58,6 +58,23 @@ stats.update(50.0);
 
 For more information, please have a look at the public interface of the
 [StatsGraph](./src/stats.ts) class.
+
+## Features
+
+### 3D - Static
+
+todo
+
+### 3D - Tracked
+
+todo
+
+### HTML Component
+
+![HTML stats example](https://github.com/DavidPeicho/wle-stats/blob/main/img/example.png)
+
+Add the `stats-html` component anywhere in your scene. For more information, please have a look at
+the [StatsHtmlComponent](./src/components/stats-html-component.ts).
 
 ## Future
 
