@@ -184,6 +184,9 @@
             "components": [
                 {
                     "type": "stats-container"
+                },
+                {
+                    "type": "stats-html"
                 }
             ]
         },
@@ -304,7 +307,7 @@
             ]
         },
         "79": {
-            "name": "StatsPanel",
+            "name": "StaticStatsPanel",
             "translation": [
                 -2.1703083,
                 1.8483,
@@ -329,9 +332,101 @@
                         "mesh": "76",
                         "positionTrackingSpeed": 1.0,
                         "rotationTrackingSpeed": 1.0,
+                        "mode": "Static"
+                    }
+                }
+            ]
+        },
+        "80": {
+            "name": "StatsPanel",
+            "translation": [
+                -2.1703112,
+                5.0075731,
+                5.960464477539063e-8
+            ],
+            "rotation": [
+                -0.1528822,
+                0.1921819,
+                0.0303241,
+                0.9689033
+            ],
+            "scaling": [
+                0.9999995,
+                0.9999993,
+                0.9999996
+            ],
+            "components": [
+                {
+                    "type": "stats-3d",
+                    "stats-3d": {
+                        "text": "82",
+                        "mesh": "81",
+                        "positionTrackingSpeed": 1.0,
+                        "rotationTrackingSpeed": 1.0,
                         "mode": "Overlay"
                     }
                 }
+            ],
+            "parent": null
+        },
+        "81": {
+            "name": "StatsGraph",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "7",
+                        "material": "77"
+                    }
+                }
+            ],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scaling": [
+                0.4600001,
+                0.4600002,
+                0.4600001
+            ],
+            "parent": "80"
+        },
+        "82": {
+            "name": "PanelText",
+            "parent": "80",
+            "components": [
+                {
+                    "type": "text",
+                    "text": {
+                        "justification": "middle",
+                        "alignment": "center",
+                        "text": "FPS: 0.0\n",
+                        "effect": "none"
+                    }
+                }
+            ],
+            "translation": [
+                -0.0272367,
+                0.3882164,
+                0.0506362
+            ],
+            "rotation": [
+                0.0000174,
+                -0.0000017,
+                -0.0000017,
+                1.0
+            ],
+            "scaling": [
+                0.5,
+                0.5,
+                0.5
             ]
         }
     },

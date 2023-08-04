@@ -1,6 +1,6 @@
 # Wonderland Engine Stats
 
-WonderlandEngine stats component.
+Wonderland Engine stats component.
 
 ![Example showing FPS and frame time](https://github.com/DavidPeicho/wle-stats/blob/main/img/example.png)
 
@@ -8,10 +8,10 @@ This library is inspired by [stats.js](https://github.com/mrdoob/stats.js) from 
 
 **Features Overview**:
 
-* A custom component to add in your [Wonderland Engine](https://wonderlandengine.com/) scenes
-    * FPS monitoring, based on the engine pre & post render hooks
-    * Frame time monitoring, based on the engine pre & post render hooks
-* [StatsGraph](./src/stats.ts) class usable on any webpage without Wonderland Engine
+* [HTML graph](#html-Component)
+* [3D static graph](#3d-static)
+* [3D overlay graph](#3d-overlay)
+* [Generic Graph](#generic-graph) (to use outside of Wonderland Engine)
 
 ## Usage
 
@@ -21,16 +21,39 @@ You can install the library using `yarn` / `npm`:
 yarn i wle-stats
 ```
 
-### Wonderland Engine Component
+In order to have a quick overview of each features, you can open the [example](./example) using Wonderland Engine.
 
-No further setup is required, you can search the component and add it to any object.
+## Features
 
-For more information, you can open the Wonderland Engine example located
-in [Wonderland Engine example](./example).
+### 3D Static
 
-### Manually
+https://github.com/DavidPeicho/wle-stats/assets/8783766/4aa91829-ccdf-41aa-97a9-45b1ac46009f
 
-This library exposes a [StatsGraph class](./src/stats.ts) class you can use.
+1. Create an object and add a mesh component
+2. Create a material. You can use any shader / pipeline, as long as the material contains
+  either a `flatTexture` or a `diffuseTexture` parameter.
+3. Add the `stats-3d` component on an object at the desired location.
+4. Reference the object containing the mesh on the `stats-3d` component
+
+For more information, please have a look at the [Stats3dComponent](./src/components/stats3d-component.ts).
+
+### 3D Overlay
+
+https://github.com/DavidPeicho/wle-stats/assets/8783766/0bad31cf-9ed5-46ea-acd7-79211e376431
+
+Follow the same step described in the [3D Static](#3d-static) section. Set the `mode` property of the `stats-3d` component to: `Overlay`.
+
+### HTML Component
+
+![HTML stats example](https://github.com/DavidPeicho/wle-stats/blob/main/img/example.png)
+
+Add the `stats-html` component anywhere in your scene. This component will be added in `document.body` by default.
+
+For more information, please have a look at the [StatsHtmlComponent](./src/components/stats-html-component.ts).
+
+### Generic Graph
+
+This library exposes the [StatsGraph](./src/stats.ts) class, usable outside of the Wonderland Engine ecosystem.
 
 ```js
 import {StatsGraph} from 'wle-stats';
@@ -43,7 +66,7 @@ const stats = new StatsGraph({
 });
 ```
 
-You can add the graph canvas anywhere in the dom using:
+Add the graph canvas in the dom using:
 
 ```js
 document.body.append(stats.canvas);
@@ -58,23 +81,6 @@ stats.update(50.0);
 
 For more information, please have a look at the public interface of the
 [StatsGraph](./src/stats.ts) class.
-
-## Features
-
-### 3D - Static
-
-https://github.com/DavidPeicho/wle-stats/assets/8783766/4aa91829-ccdf-41aa-97a9-45b1ac46009f
-
-### 3D - Tracked
-
-https://github.com/DavidPeicho/wle-stats/assets/8783766/0bad31cf-9ed5-46ea-acd7-79211e376431
-
-### HTML Component
-
-![HTML stats example](https://github.com/DavidPeicho/wle-stats/blob/main/img/example.png)
-
-Add the `stats-html` component anywhere in your scene. For more information, please have a look at
-the [StatsHtmlComponent](./src/components/stats-html-component.ts).
 
 ## Future
 
