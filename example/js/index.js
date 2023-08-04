@@ -14,6 +14,7 @@
 /* wle:auto-imports:start */
 import {MouseLookComponent} from '@wonderlandengine/components';
 import {WasdControlsComponent} from '@wonderlandengine/components';
+import {Stats3dComponent} from 'wle-stats';
 import {StatsComponent} from 'wle-stats';
 import {StatsContainer} from './stats-container.js';
 /* wle:auto-imports:end */
@@ -76,6 +77,7 @@ if (document.readyState === 'loading') {
 /* wle:auto-register:start */
 engine.registerComponent(MouseLookComponent);
 engine.registerComponent(WasdControlsComponent);
+engine.registerComponent(Stats3dComponent);
 engine.registerComponent(StatsComponent);
 engine.registerComponent(StatsContainer);
 /* wle:auto-register:end */
