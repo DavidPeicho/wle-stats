@@ -63,7 +63,7 @@ For more information, please have a look at the public interface of the
 
 ### 3D - Static
 
-todo
+https://github.com/DavidPeicho/wle-stats/assets/8783766/4aa91829-ccdf-41aa-97a9-45b1ac46009f
 
 ### 3D - Tracked
 
