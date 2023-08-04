@@ -211,12 +211,6 @@
                         "mesh": "7",
                         "material": "77"
                     }
-                },
-                {
-                    "type": "stats-3d",
-                    "stats-3d": {
-                        "text": "78"
-                    }
                 }
             ],
             "translation": [
@@ -256,7 +250,7 @@
             "translation": [
                 2.9802322387695313e-8,
                 0.5348085,
-                5.960464477539063e-8
+                5.960464477539064e-8
             ],
             "rotation": [
                 0.0,
@@ -341,6 +335,18 @@
                 0.9999995,
                 0.9999993,
                 0.9999997
+            ],
+            "components": [
+                {
+                    "type": "stats-3d",
+                    "stats-3d": {
+                        "text": "78",
+                        "mesh": "76",
+                        "positionTrackingSpeed": 1.0,
+                        "rotationTrackingSpeed": 1.0,
+                        "mode": "Overlay"
+                    }
+                }
             ]
         }
     },

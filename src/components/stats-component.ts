@@ -56,6 +56,9 @@ export class StatsComponent extends StatsComponentBase {
     /** @override */
     static TypeName = 'stats';
 
+    /** @override */
+    static Properties = Object.assign({}, StatsComponentBase.Properties);
+
     /**
      * HTML id of the parent container. When empty,
      * defaults to `document.body`.
