@@ -55,34 +55,6 @@
                 0.7069638
             ]
         },
-        "16": {
-            "name": "Cube",
-            "components": [
-                {
-                    "type": "mesh",
-                    "mesh": {
-                        "mesh": "8",
-                        "material": "22"
-                    }
-                }
-            ],
-            "scaling": [
-                0.5,
-                0.5,
-                0.5
-            ],
-            "translation": [
-                2.9802322387695313e-8,
-                0.4999999,
-                5.960464477539065e-8
-            ],
-            "rotation": [
-                0.0,
-                0.0,
-                0.0,
-                1.0
-            ]
-        },
         "17": {
             "name": "NonVrCamera",
             "parent": "14",
@@ -207,6 +179,92 @@
                 1.0
             ]
         },
+        "74": {
+            "name": "Global",
+            "components": [
+                {
+                    "type": "stats",
+                    "stats": {
+                        "parentContainer": "stats-container"
+                    }
+                },
+                {
+                    "type": "stats",
+                    "stats": {
+                        "statsType": "milliseconds",
+                        "parentContainer": "stats-container",
+                        "updateRateMs": 100.0,
+                        "color": "#1abc9c"
+                    }
+                },
+                {
+                    "type": "stats-container"
+                }
+            ]
+        },
+        "76": {
+            "name": "StatsGraph",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "7",
+                        "material": "77"
+                    }
+                },
+                {
+                    "type": "stats-3d",
+                    "stats-3d": {
+                        "text": "78"
+                    }
+                }
+            ],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scaling": [
+                0.4600001,
+                0.4600002,
+                0.4600001
+            ],
+            "parent": "79"
+        },
+        "16": {
+            "name": "Cube",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "8",
+                        "material": "22"
+                    }
+                }
+            ],
+            "scaling": [
+                0.5,
+                0.5,
+                0.5
+            ],
+            "translation": [
+                2.9802322387695313e-8,
+                0.5348085,
+                5.960464477539063e-8
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
         "27": {
             "name": "Sphere",
             "components": [
@@ -235,27 +293,54 @@
                 1.0
             ]
         },
-        "74": {
-            "name": "Global",
+        "78": {
+            "name": "PanelText",
+            "parent": "79",
             "components": [
                 {
-                    "type": "stats",
-                    "stats": {
-                        "parentContainer": "stats-container"
+                    "type": "text",
+                    "text": {
+                        "justification": "middle",
+                        "alignment": "center",
+                        "text": "FPS: 0.0\n",
+                        "effect": "none"
                     }
-                },
-                {
-                    "type": "stats",
-                    "stats": {
-                        "statsType": "milliseconds",
-                        "parentContainer": "stats-container",
-                        "updateRateMs": 100.0,
-                        "color": "#1abc9c"
-                    }
-                },
-                {
-                    "type": "stats-container"
                 }
+            ],
+            "translation": [
+                -0.0272368,
+                0.3682299,
+                0.0441691
+            ],
+            "rotation": [
+                0.0000178,
+                -0.0000015,
+                -0.0000017,
+                1.0
+            ],
+            "scaling": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        "79": {
+            "name": "StatsPanel",
+            "translation": [
+                -2.1703083,
+                1.8483,
+                -5.662441253662109e-7
+            ],
+            "rotation": [
+                -0.152882,
+                0.1921818,
+                0.0303241,
+                0.9689033
+            ],
+            "scaling": [
+                0.9999995,
+                0.9999993,
+                0.9999997
             ]
         }
     },
@@ -304,7 +389,19 @@
                 "file": "default"
             },
             "Text": {
-                "font": "55"
+                "font": "55",
+                "color": [
+                    0.9098039,
+                    0.0,
+                    0.5411764,
+                    1.0
+                ],
+                "effectColor": [
+                    0.8923766,
+                    0.3001266,
+                    0.6524133,
+                    1.0
+                ]
             }
         },
         "20": {
@@ -419,6 +516,36 @@
                     1.0
                 ]
             }
+        },
+        "77": {
+            "name": "StatsPanel",
+            "Phong": {
+                "diffuseColor": [
+                    0.1529411,
+                    0.7882353,
+                    0.5411764,
+                    1.0
+                ],
+                "specularColor": [
+                    9.999999974752427e-7,
+                    9.999899930335232e-7,
+                    9.999899930335232e-7,
+                    1.0
+                ],
+                "ambientColor": [
+                    0.0,
+                    0.2352941,
+                    0.1437908,
+                    1.0
+                ],
+                "emissiveColor": [
+                    0.0,
+                    0.2352941,
+                    0.1437908,
+                    1.0
+                ]
+            },
+            "pipeline": "35"
         }
     },
     "shaders": {
@@ -770,6 +897,12 @@
             "features": {
                 "DEPRECATED_LIGHT_ATTENUATION": true
             }
+        },
+        "75": {
+            "link": {
+                "name": "TileFeedback",
+                "file": "default"
+            }
         }
     },
     "textures": {},
@@ -779,7 +912,8 @@
             "link": {
                 "name": "DejaVuSans.ttf",
                 "file": "default"
-            }
+            },
+            "outline": true
         }
     },
     "languages": {},
