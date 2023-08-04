@@ -47,8 +47,10 @@ export class StatsComponentBase extends Component {
     /** Stats object. @hidden */
     protected _stats: StatsGraph = new StatsGraph();
 
+    /** Last computed value (FPS / ms). @hidden */
     protected _value: number = 0;
 
+    /** Last computed text (FPS / ms). @hidden */
     protected _text: string = '';
 
     /** Timestamp starting at the last update. @hidden */
