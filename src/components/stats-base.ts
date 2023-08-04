@@ -1,12 +1,7 @@
-import {Component, Texture} from '@wonderlandengine/api';
+import {Component} from '@wonderlandengine/api';
 import {property} from '@wonderlandengine/api/decorators.js';
 
 import {StatsGraph} from '../stats.js';
-
-interface TexturedMaterial {
-    diffuseTexture?: Texture | null;
-    flatTexture?: Texture | null;
-}
 
 /**
  * Stats type.

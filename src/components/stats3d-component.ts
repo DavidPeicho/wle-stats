@@ -43,15 +43,11 @@ const _quatA = quat.create();
 const _quatB = quat.create();
 
 /**
- * Statistics component.
+ * Statistics 3D component.
  *
- * This component will hook a container with a canvas containing
- * a graph with a FPS metric.
- *
- * ## Usage
- *
- * This component can be added anywhere in your scene, like a regular
- * Wonderland Engine component.
+ * At the opposite of {@link StatsComponent}, this component will render the
+ * graph in the 3D scene. The graph is uploaded as a texture and attached
+ * to the {@link Stats3dComponent.mesh} material.
  */
 export class Stats3dComponent extends StatsComponentBase {
     /** @override */
@@ -142,7 +138,7 @@ export class Stats3dComponent extends StatsComponentBase {
         if (!mesh) throw new Error('no mesh component found on object');
         if (!mesh.material) throw new Error('no mesh has no material attached');
 
-        const scale = this.object.getScalingLocal();
+        const scale = meshObject.getScalingLocal();
         meshObject.setScalingLocal([scale[0] * aspect, scale[1], scale[2]]);
 
         this._texture = new Texture(this._engine, this._stats.canvas);

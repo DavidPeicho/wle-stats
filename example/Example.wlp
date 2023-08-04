@@ -183,21 +183,6 @@
             "name": "Global",
             "components": [
                 {
-                    "type": "stats",
-                    "stats": {
-                        "parentContainer": "stats-container"
-                    }
-                },
-                {
-                    "type": "stats",
-                    "stats": {
-                        "statsType": "milliseconds",
-                        "parentContainer": "stats-container",
-                        "updateRateMs": 100.0,
-                        "color": "#1abc9c"
-                    }
-                },
-                {
                     "type": "stats-container"
                 }
             ]
@@ -250,7 +235,7 @@
             "translation": [
                 2.9802322387695313e-8,
                 0.5348085,
-                5.960464477539064e-8
+                5.960464477539065e-8
             ],
             "rotation": [
                 0.0,
@@ -302,20 +287,20 @@
                 }
             ],
             "translation": [
-                -0.0272368,
-                0.3682299,
-                0.0441691
+                -0.0272367,
+                0.3882164,
+                0.0506362
             ],
             "rotation": [
-                0.0000178,
-                -0.0000015,
+                0.0000174,
+                -0.0000017,
                 -0.0000017,
                 1.0
             ],
             "scaling": [
-                1.0,
-                1.0,
-                1.0
+                0.5,
+                0.5,
+                0.5
             ]
         },
         "79": {

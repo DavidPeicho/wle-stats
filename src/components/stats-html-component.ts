@@ -1,8 +1,6 @@
-import {Component, Object3D, TextComponent, Texture} from '@wonderlandengine/api';
 import {property} from '@wonderlandengine/api/decorators.js';
 
 import {BACKGROUND, MAIN_COLOR} from '../colors.js';
-import {StatsGraph} from '../stats.js';
 import {StatsComponentBase} from './stats-base.js';
 
 /**
@@ -52,9 +50,9 @@ function template(canvas: HTMLCanvasElement) {
  * This component can be added anywhere in your scene, like a regular
  * Wonderland Engine component.
  */
-export class StatsComponent extends StatsComponentBase {
+export class StatsHtmlComponent extends StatsComponentBase {
     /** @override */
-    static TypeName = 'stats';
+    static TypeName = 'stats-html';
 
     /** @override */
     static Properties = Object.assign({}, StatsComponentBase.Properties);
