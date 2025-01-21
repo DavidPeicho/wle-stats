@@ -62,12 +62,12 @@ export class StatsComponentBase extends Component {
     /** @override */
     onActivate(): void {
         this.reset();
-        this._engine.scene.onPostRender.add(this._onPostRender);
+        this.engine.scene.onPostRender.add(this._onPostRender);
     }
 
     /** @override */
     onDeactivate(): void {
-        this._engine.scene.onPostRender.remove(this._onPostRender);
+        this.engine.scene.onPostRender.remove(this._onPostRender);
     }
 
     reset(): this {
