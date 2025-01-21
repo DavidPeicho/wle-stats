@@ -141,14 +141,14 @@ export class Stats3dComponent extends StatsComponentBase {
         const scale = meshObject.getScalingLocal();
         meshObject.setScalingLocal([scale[0] * aspect, scale[1], scale[2]]);
 
-        this._texture = new Texture(this._engine, this._stats.canvas);
+        this._texture = new Texture(this.engine, this._stats.canvas);
         this._material = mesh.material as TexturedMaterial;
         this._material.diffuseTexture = this._texture;
         this._material.flatTexture = this._texture;
 
         this._textComp = this.text?.getComponent(TextComponent) ?? null;
 
-        this._views = this._engine.scene.activeViews;
+        this._views = this.engine.scene.activeViews;
 
         super.onActivate();
     }
@@ -183,7 +183,7 @@ export class Stats3dComponent extends StatsComponentBase {
      * @hidden
      */
     private _followTarget(dt: number): void {
-        const vrDisabled = this._engine.xr === null || this._views.length < 2;
+        const vrDisabled = this.engine.xr === null || this._views.length < 2;
         const camera = (vrDisabled ? this._views[0] : this._views[1]).object;
 
         // @todo: Offset to bottom left corner.
