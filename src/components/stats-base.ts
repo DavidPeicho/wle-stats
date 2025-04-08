@@ -39,6 +39,12 @@ export class StatsComponentBase extends Component {
     @property.float(500)
     updateRateMs: number = 500;
 
+    @property.float(200)
+    width: number = 200;
+
+    @property.float(150)
+    height: number = 150;
+
     /** Stats object. */
     stats: StatsGraph = new StatsGraph();
 
@@ -68,6 +74,10 @@ export class StatsComponentBase extends Component {
     /** @override */
     onDeactivate(): void {
         this.engine.scene.onPostRender.remove(this._onPostRender);
+    }
+
+    start(){
+        this.stats.setDimensions(this.width, this.height);
     }
 
     reset(): this {
