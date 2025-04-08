@@ -39,8 +39,8 @@ export class StatsComponentBase extends Component {
     @property.float(500)
     updateRateMs: number = 500;
 
-    /** Stats object. @hidden */
-    protected _stats: StatsGraph = new StatsGraph();
+    /** Stats object. */
+    stats: StatsGraph = new StatsGraph();
 
     /** Last computed value (FPS / ms). @hidden */
     protected _value: number = 0;
@@ -79,13 +79,13 @@ export class StatsComponentBase extends Component {
     @property.float(0)
     set minY(value: number) {
         // @todo: Fix workaround due to how Wonderland Engine setup defaults.
-        if (this._stats) this._stats.min = value;
+        if (this.stats) this.stats.min = value;
     }
 
     @property.float(120)
     set maxY(value: number) {
         // @todo: Fix workaround due to how Wonderland Engine setup defaults.
-        if (this._stats) this._stats.max = value;
+        if (this.stats) this.stats.max = value;
     }
 
     private _update(): void {
@@ -109,7 +109,7 @@ export class StatsComponentBase extends Component {
                 );
         }
 
-        this._stats.update(this._value);
+        this.stats.update(this._value);
         this.reset();
     }
 }
