@@ -80,7 +80,7 @@ export class StatsHtmlComponent extends StatsComponentBase {
         // @ts-ignore
         super(...arguments);
 
-        const {container, text} = template(this._stats.canvas);
+        const {container, text} = template(this.stats.canvas);
         this._container = container;
         this._textElement = text;
     }
@@ -117,10 +117,10 @@ export class StatsHtmlComponent extends StatsComponentBase {
     @property.string(MAIN_COLOR)
     set color(value: string) {
         // @todo: Fix workaround due to how Wonderland Engine setup defaults.
-        if (!this._textElement || !this._stats) return;
+        if (!this._textElement || !this.stats) return;
 
         this._textElement.style.color = value;
-        this._stats.main = value;
-        this._stats.needsClear();
+        this.stats.main = value;
+        this.stats.needsClear();
     }
 }

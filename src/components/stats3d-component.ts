@@ -130,8 +130,8 @@ export class Stats3dComponent extends StatsComponentBase {
 
     /** @override */
     onActivate(): void {
-        this._stats.setDimensions(this.width, this.height);
-        const aspect = this._stats.canvas.width / this._stats.canvas.height;
+        this.stats.setDimensions(this.width, this.height);
+        const aspect = this.stats.canvas.width / this.stats.canvas.height;
 
         const meshObject = this.mesh ?? this.object;
         const mesh = meshObject.getComponent('mesh');
@@ -141,7 +141,7 @@ export class Stats3dComponent extends StatsComponentBase {
         const scale = meshObject.getScalingLocal();
         meshObject.setScalingLocal([scale[0] * aspect, scale[1], scale[2]]);
 
-        this._texture = new Texture(this.engine, this._stats.canvas);
+        this._texture = new Texture(this.engine, this.stats.canvas);
         this._material = mesh.material as TexturedMaterial;
         this._material.diffuseTexture = this._texture;
         this._material.flatTexture = this._texture;
@@ -170,7 +170,7 @@ export class Stats3dComponent extends StatsComponentBase {
         if (this.mode === Mode.Overlay) this._followTarget(dt);
 
         /* Update the panel's content. */
-        const canvas = this._stats.canvas;
+        const canvas = this.stats.canvas;
         this._texture!.updateSubImage(0, 0, canvas.width, canvas.height);
         if (this._textComp) this._textComp.text = this._text;
     }
